@@ -6,6 +6,39 @@
 </head>
 <body>
 <script>
+    // 监听message事件
+    window.addEventListener("message", receiveMessageFromParent, false);
+    
+    // 父亲页面发送 token
+    function receiveMessageFromParent ( event ) {
+        // console.log( 'receiveMessageFromIndex', event )
+        // console.log( 'token', event.data )
+        let token = event.data
+        gotoAdminer(token)
+    }
+
+    function gotoAdminer (token) {
+        // 模拟登录 post 请求，应该放在后端运行
+        var url = "http://127.0.0.1:8090/adminer-z.php"
+        let server = "127.0.0.1%3A3306"
+        let username = "root"
+        let pass = token
+        let data = `auth%5Bdriver%5D=server&auth%5Bserver%5D=${server}&auth%5Busername%5D=${username}&auth%5Bpassword%5D=${pass}&auth%5Bdb%5D=`
+        var httpRequest = new XMLHttpRequest();
+        httpRequest.open("POST",url,true);
+        httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        httpRequest.send(data);
+        httpRequest.onreadystatechange = ()=>{
+            if(httpRequest.readyState == 4 && httpRequest.status == 200){
+                // var data = JSON.parse(httpRequest.responseText);
+                // console.log(data);
+                // console.error(httpRequest.responseText)
+                location.href="http://127.0.0.1:8090/adminer-z.php?server=127.0.0.1%3A3306&username=root&db=test&select=aaa";
+            }
+        }
+    }
+
+/*
 
 // cookie 在前端生成，登录 post 请求中携带 cookie
 
@@ -34,6 +67,7 @@ httpRequest.onreadystatechange = ()=>{
 
 // location.href="http://127.0.0.1:8090/adminer-z.php?server=127.0.0.1%3A3306&username=root&db=test&select=aaa";
 
+*/
 
 </script>
 </body>

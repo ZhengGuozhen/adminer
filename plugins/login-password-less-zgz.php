@@ -19,8 +19,32 @@ class AdminerLoginPasswordLess_zgz {
 
 	function credentials() {
 		$password = get_password();
-		// @zgz 123456 是数据库密码
-		return array(SERVER, $_GET["username"], (password_verify($password, $this->password_hash) ? "123456" : $password));
+
+		// token 作为用户密码传入
+		// echo $password;
+		$token = $password;
+		// cool-admin 后台鉴权
+		$options = array(
+            'http' => array(
+                'method' => 'GET',
+                'header' => "Content-Type: application/json\r\n" . 
+                            "Authorization: " . $token . "\r\n"
+                            ,
+                'timeout' => 0.1 * 60 // 超时时间（单位:s）
+                )
+        );
+        $context = stream_context_create($options);
+        $result = file_get_contents('http://127.0.0.1:8001/api/test/1', false, $context);
+		$resultObject =  json_decode($result, false);
+		$r = $resultObject->code;
+		// echo $r;
+
+		if ( $r === 1000 ) {
+			return array(SERVER, "root", "123456");
+		} else {
+			return array(SERVER, $_GET["username"], "");
+		}
+
 	}
 	
 	function login($login, $password) {

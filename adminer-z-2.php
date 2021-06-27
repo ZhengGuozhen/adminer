@@ -45,7 +45,7 @@ if (isset($_GET["token"])) {
                             "Cookie: adminer_key=6f42d5f366e66da79e571691623d7812; adminer_sid=1a6ac02584b1d7b184073b0415e92cf7;\r\n"
                             ,
                 'content' => $postdata,
-                'timeout' => 0.05 * 60 // 超时时间（单位:s）
+                'timeout' => 0.1 * 60 // 超时时间（单位:s）
                 )
         );
         $context = stream_context_create($options);
@@ -71,7 +71,7 @@ if (isset($_GET["token"])) {
                 'header' => "Content-Type: application/json\r\n" . 
                             "Authorization: " . $token . "\r\n"
                             ,
-                'timeout' => 0.05 * 60 // 超时时间（单位:s）
+                'timeout' => 0.1 * 60 // 超时时间（单位:s）
                 )
         );
         $context = stream_context_create($options);
