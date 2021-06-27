@@ -9,7 +9,7 @@
     // 监听message事件
     window.addEventListener("message", receiveMessageFromParent, false);
     
-    // 父亲页面发送 token
+    // 父页面发送 token
     function receiveMessageFromParent ( event ) {
         // console.log( 'receiveMessageFromIndex', event )
         // console.log( 'token', event.data )
@@ -18,7 +18,7 @@
     }
 
     function gotoAdminer (token) {
-        // 模拟登录 post 请求，应该放在后端运行
+        // 模拟登录 post 请求
         var url = "http://127.0.0.1:8090/adminer-z.php"
         let server = "127.0.0.1%3A3306"
         let username = "root"
@@ -33,7 +33,7 @@
                 // var data = JSON.parse(httpRequest.responseText);
                 // console.log(data);
                 // console.error(httpRequest.responseText)
-                location.href="http://127.0.0.1:8090/adminer-z.php?server=127.0.0.1%3A3306&username=root&db=test&select=aaa";
+                location.href=`http://127.0.0.1:8090/adminer-z.php?server=${server}&username=${username}&db=test&select=aaa`;
             }
         }
     }
