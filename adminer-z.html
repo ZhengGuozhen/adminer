@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
+<body>
+<script>
+
+// cookie 在前端生成，登录 post 请求中携带 cookie
+
+// document.cookie="adminer_key=6f42d5f366e66da79e571691623d7812;";
+// document.cookie="adminer_sid=1a6ac02584b1d7b184073b0415e92cf7;";
+// document.cookie="adminer_permanent=c2VydmVy-MTI3LjAuMC4xOjMzMDY%3D-cm9vdA%3D%3D-Y29vbF9hZG1pbl8yMDIxMDYyMA%3D%3D%3AnpGlD4bWSZqhOy7H";
+
+// 模拟登录 post 请求，应该放在后端运行
+var url = "http://127.0.0.1:8090/adminer-z.php"
+let server = "127.0.0.1%3A3306"
+let username = "root"
+let pass = "123456"
+let data = `auth%5Bdriver%5D=server&auth%5Bserver%5D=${server}&auth%5Busername%5D=${username}&auth%5Bpassword%5D=${pass}&auth%5Bdb%5D=`
+var httpRequest = new XMLHttpRequest();
+httpRequest.open("POST",url,true);
+httpRequest.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+httpRequest.send(data);
+httpRequest.onreadystatechange = ()=>{
+    if(httpRequest.readyState == 4 && httpRequest.status == 200){
+        // var data = JSON.parse(httpRequest.responseText);
+        // console.log(data);
+        // console.error(httpRequest.responseText)
+        location.href="http://127.0.0.1:8090/adminer-z.php?server=127.0.0.1%3A3306&username=root&db=test&select=aaa";
+    }
+}
+
+// location.href="http://127.0.0.1:8090/adminer-z.php?server=127.0.0.1%3A3306&username=root&db=test&select=aaa";
+
+
+</script>
+</body>
+</html>

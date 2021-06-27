@@ -32,6 +32,9 @@ function adminer_object() {
 		new AdminerTablesFilter,
 		new AdminerEditForeign,
 
+		// @zgz 允许嵌入 iframe
+		new AdminerFrames(),
+		
 		// @zgz
 		new AdminerLoginPasswordLess_zgz(password_hash("zgz", PASSWORD_DEFAULT)),
 		
