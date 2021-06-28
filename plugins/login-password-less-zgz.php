@@ -1,27 +1,23 @@
 <?php
 
-/** Enable login for password-less database
-* @link https://www.adminer.org/plugins/#use
-* @author Jakub Vrana, https://www.vrana.cz/
-* @license https://www.apache.org/licenses/LICENSE-2.0 Apache License, Version 2.0
-* @license https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License, version 2 (one or other)
-*/
+// @zgz
+// 针对嵌入 iframe 的应用场景，重新设计了鉴权方式
+
 class AdminerLoginPasswordLess_zgz {
-	/** @access protected */
-	var $password_hash;
 	
-	/** Set allowed password
-	* @param string result of password_hash
-	*/
-	function __construct($password_hash) {
-		$this->password_hash = $password_hash;
+	var $mode;
+	
+	function __construct($p = "normal") {
+		$this->mode = $p;
 	}
 
 	function credentials() {
 		$password = get_password();
 
-		if (true) {
-			// cool-admin 后台鉴权，token 作为用户密码传入
+		if ($this->mode === "token") {
+			// cool-admin 后台鉴权
+			// 用户名为数据库用户名
+			// 用户密码为 cool-admin token
 			$token = $password;
 			$options = array(
 				'http' => array(
@@ -39,19 +35,33 @@ class AdminerLoginPasswordLess_zgz {
 			// echo $r;
 	
 			if ( $r === 1000 ) {
+				// 鉴权通过，设置数据库账号密码
 				return array(SERVER, "root", "123456");
 			} else {
 				return array(SERVER, "", "");
 			}
-			
-		} else {
+
+		} else if ($this->mode === "normal"){
+
+			// 用户名密码鉴权
 			return array(SERVER, $_GET["username"], $password);
+
+		} else if ($this->mode === "none"){
+
+			// 无鉴权，有安全风险！
+			return array(SERVER, "root", "123456");
+
+		} else {
+
+			// 用户名密码鉴权
+			return array(SERVER, $_GET["username"], $password);
+			
 		}
 
 	}
 	
 	function login($login, $password) {
-		// @zgz
+		// @zgz 允许无密码用户登录
 		// if ($password != "") {
 		// 	return true;
 		// }

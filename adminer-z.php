@@ -36,7 +36,9 @@ function adminer_object() {
 		new AdminerFrames(),
 		
 		// @zgz
-		new AdminerLoginPasswordLess_zgz(password_hash("zgz", PASSWORD_DEFAULT)),
+		// new AdminerLoginPasswordLess_zgz("normal"),
+		// new AdminerLoginPasswordLess_zgz("token"),
+		new AdminerLoginPasswordLess_zgz("none"),// 有安全风险！仅供调试！
 		
 		// 下载了依赖，汉化jquery-ui-timepicker-addon.min.js
 		new AdminerEditCalendar(
@@ -49,6 +51,14 @@ function adminer_object() {
 			 . script_src("./externals/jquery-ui-timepicker-addon.min.js")
 			 . "<link rel='stylesheet' href='./externals/jquery-ui-1.8.24/themes/base/jquery.ui.all.css'>\n<style>\n.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }\n.ui-timepicker-div dl { text-align: left; }\n.ui-timepicker-div dl dt { height: 25px; }\n.ui-timepicker-div dl dd { margin: -25px 0 10px 65px; }\n.ui-timepicker-div td { font-size: 90%; }\n</style>\n"
 			 , "./externals/jquery-ui-1.8.24/ui/i18n/jquery.ui.datepicker-%s.js"),
+
+		new AdminerDesigns($arrayName = array(
+			'http://127.0.0.1:8090/adminer-z-2.css' => '深色精简',
+			'http://127.0.0.1:8090/adminer-z.css' => '浅色精简',
+			'http://127.0.0.1:8090/designs/flat/adminer.css' => '浅色flat',
+			'http://127.0.0.1:8090/designs/pepa-linha/adminer.css' => '浅色',
+			'http://127.0.0.1:8090/designs/pepa-linha-dark/adminer.css' => '深色',
+		)),
 
 	);
 	

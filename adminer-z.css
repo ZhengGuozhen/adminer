@@ -132,7 +132,18 @@ body {
 /* 隐藏 */
 /* 左侧菜单栏 */
 #menu {
+	height: 0;
+	/* display: none; */
+}
+#menu > * {
 	display: none;
+}
+#menu p.links {
+	display: none;
+}
+#menu > form:first-child {
+	/* design 选择器 */
+	display: block;
 }
 /* 语言选择、登出按钮 */
 body > form {

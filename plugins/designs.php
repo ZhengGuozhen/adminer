@@ -35,7 +35,9 @@ class AdminerDesigns {
 	
 	function navigation($missing) {
 		echo "<form action='' method='post' style='position: fixed; bottom: .5em; right: .5em;'>";
-		echo html_select("design", array("" => "(design)") + $this->designs, $_SESSION["design"], "this.form.submit();");
+		// @zgz
+		// echo html_select("design", array("" => "(design)") + $this->designs, $_SESSION["design"], "this.form.submit();");
+		echo html_select("design", array("" => "默认主题") + $this->designs, $_SESSION["design"], "this.form.submit();");
 		echo '<input type="hidden" name="token" value="' . get_token() . '">';
 		echo "</form>\n";
 	}
