@@ -53,8 +53,8 @@ function adminer_object() {
 			 , "./externals/jquery-ui-1.8.24/ui/i18n/jquery.ui.datepicker-%s.js"),
 
 		new AdminerDesigns($arrayName = array(
-			'http://127.0.0.1:8090/adminer-z-2.css' => '深色精简',
-			'http://127.0.0.1:8090/adminer-z.css' => '浅色精简',
+			'http://127.0.0.1:8090/adminer-深色精简.css' => '深色精简',
+			'http://127.0.0.1:8090/adminer-浅色精简.css' => '浅色精简',
 			'http://127.0.0.1:8090/designs/flat/adminer.css' => '浅色flat',
 			'http://127.0.0.1:8090/designs/pepa-linha/adminer.css' => '浅色',
 			'http://127.0.0.1:8090/designs/pepa-linha-dark/adminer.css' => '深色',
